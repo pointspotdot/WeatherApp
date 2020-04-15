@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeatherApp</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="src/styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Thambi+2&family=Pacifico&family=Roboto+Mono&display=swap"
+        rel="stylesheet">
+    <script src="https://kit.fontawesome.com/2dbffa87f4.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div id="date" class="appTitle card-title" style="margin-top: .75rem;">29-Mar-20</div>
+        <header>
+            <div class="row">
+                <div class="col appLogo">
+                    <i class="fas fa-poo-storm"></i>
+                    <div class="appTitle">WeatherApp</div>
+                </div>
+                <div class="col-6 searchGroup">
+                    <form id="search-form">
+                        <div class="input-group">
+                            <input type="text" id="searchField" class="form-control searchField" placeholder="Search..."
+                                name="search">
+                            <div class="input-group-addon input-group-addon-btn">
+                                <button type="submit" class="btn btn-light form-control"><i
+                                        class="fa fa-search"></i></button>
+                                <button id="locationButton" type="button" class="btn btn-light form-control"><i
+                                        class="fas fa-compass"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-4 currentCity">
+                    Porto, Portugal
+                </div>
+            </div>
+            <div style="text-align: right;">
+                <button id="tempButton" class="celsius">(Want to see the temperatures in Farenheit?)</button>
+            </div>
+        </header>
+        <div class="card container">
+            <div class="date">
+                <div class="introText appTitle">The weather for <span id="city"></span> is:</div>
+                <div class="row currentWeatherWrapper" style="padding-left: 15px;">
+                    <div class="col-5">
+                        <div id="weatherConditionsWrapper">
+                            <div id="currentConditionsWrapper">
+                                <div>
+                                    <img id="icon" src="" />
+                                    <div id="description"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div id="currentTemps">
+                            <div class="forecast">
+                                <span>The temperature will vary between</span>
+                                <br>
+                                <i class="fas fa-temperature-low min"></i>
+                                <span>a low of </span>
+                                <span class="currentDayMin" id="temperature"></span>
+                                <br>
+                                <i class="fas fa-temperature-high max"></i>
+                                <span>and a high of </span>
+                                <span class="currentDayMax" id="temperature"></span>.
+                                <br>
+                                <i class="fas fa-temperature-high"></i>
+                                <span>In average, today will feel like </span>
+                                <span class="currentDayRealFeel" id="temperature"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="sunEvents">
+                            <div id="sunrise"></div>
+                            <div id="sunset"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 25px;">
+            <div class="col-sm">
+                <div class="card">
+                    <div id="day1" class="card-header appTitle"></div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col weatherSymbol forecast">
+                                <img id="iconDay1" src="">
+                            </div>
+                            <div class="col forecast">
+                                <i class="fas fa-temperature-high"></i>
+                                <span class="day1temp" id="temperature"></span>
+                            </div>
+                        </div>
+                        <span class="day1desc"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="card">
+                    <div id="day2" class="card-header appTitle">
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col weatherSymbol forecast">
+                                <img id="iconDay2" src="">
+                            </div>
+                            <div class="col forecast">
+                                <i class="fas fa-temperature-high"></i>
+                                <span class="day2temp" id="temperature"></span>
+                            </div>
+                        </div>
+                        <span class="day2desc"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="card">
+                    <div id="day3" class="card-header appTitle">
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col weatherSymbol forecast">
+                                <img id="iconDay3" src="">
+                            </div>
+                            <div class="col forecast">
+                                <i class="fas fa-temperature-high"></i>
+                                <span class="day3temp" id="temperature"></span>
+                            </div>
+                        </div>
+                        <span class="day3desc"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="card">
+                    <div id="day4" class="card-header appTitle">
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col weatherSymbol forecast">
+                                <img id="iconDay4" src="">
+                            </div>
+                            <div class="col forecast">
+                                <i class="fas fa-temperature-high"></i>
+                                <span class="day4temp" id="temperature"></span>
+                            </div>
+                        </div>
+                        <span class="day4desc"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="card">
+                    <div id="day5" class="card-header appTitle">
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col weatherSymbol forecast">
+                                <img id="iconDay5" src="">
+                            </div>
+                            <div class="col forecast">
+                                <i class="fas fa-temperature-high"></i>
+                                <span class="day5temp" id="temperature"></span>
+                            </div>
+                        </div>
+                        <span class="day5desc"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer style="margin-top: 20px;">
+            This app was built by Sara Oliveira for <a href="https://www.shecodes.io/" target="_blank">SheCodes
+                Plus</a>.
+        </footer>
+    </div>
+
+    <script src="src/index.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

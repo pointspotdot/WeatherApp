@@ -1,0 +1,172 @@
+body {
+  font-family: "Roboto Mono", monospace;
+  font-size: 20px;
+}
+
+header {
+  padding-bottom: 20px;
+}
+
+footer {
+  font-size: smaller;
+  text-align: end;
+}
+
+table {
+  min-width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin: 0px auto;
+}
+
+.container {
+  border-style: groove;
+  border-color: ghostwhite;
+  margin-top: 50px;
+  padding: 25px;
+}
+
+.fa-poo-storm {
+  font-size: 50px;
+}
+
+.appLogo {
+  margin: 10px;
+  margin-top: auto;
+  margin-bottom: auto;
+  max-width: fit-content !important;
+  text-align: center;
+}
+
+.appTitle {
+  font-family: "Baloo Thambi 2", cursive;
+  font-size: 20px;
+  margin-bottom: 0 !important;
+}
+
+.searchGroup {
+  align-self: center;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.card-header,
+.card-body {
+  padding: 5px !important;
+}
+
+.card-header {
+  text-align: center;
+  border-bottom: 0px !important;
+}
+
+.card.container {
+  padding: unset;
+  margin: unset;
+}
+
+.appTitle.card-title {
+  font-size: small;
+  margin-top: unset !important;
+  text-align: right;
+}
+
+.introText {
+  text-align: left;
+  padding: 15px;
+}
+
+.col {
+  margin: auto;
+}
+
+.currentCity {
+  align-self: center;
+  font-family: "Pacifico", cursive;
+  font-size: xx-large;
+  max-width: fit-content;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.currentWeather {
+  color: rgba(253, 29, 29, 1);
+  font-size: 250px;
+  margin: 15px;
+  padding: 10px;
+  text-align: center;
+  transform: rotate(20deg);
+}
+
+.currentWeatherWrapper {
+  margin: auto !important;
+  text-align: center;
+}
+
+.date {
+  text-align: end;
+  margin-right: 15px;
+}
+
+.forecast {
+  padding-left: unset !important;
+}
+
+.min {
+  color: lightskyblue;
+}
+
+.max {
+  color: red;
+}
+
+.weatherInfo {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.weatherSymbol {
+  text-align: center;
+  font-size: 30px;
+}
+
+#sunrise,
+#sunset {
+  font-weight: 600;
+}
+
+#tempButton {
+  border-width: 0px;
+  border-color: unset;
+  background-color: unset;
+  font-size: smaller;
+  padding: unset;
+}
+
+.form-control {
+  width: unset !important;
+}
+
+.sunEvents {
+  width: 100%;
+  text-align: center;
+}
+
+#weatherConditionsWrapper {
+  display: inline-flex;
+  flex-wrap: wrap;
+}
+
+.weatherConditions {
+  margin: 5px;
+  padding: 10px;
+}
+
+#currentTemps {
+  text-align: left;
+}
+
+.card-body {
+  padding: 5px !important;
+  text-align: center;
+}
