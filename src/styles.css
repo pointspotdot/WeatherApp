@@ -53,6 +53,7 @@ table {
 .card-header,
 .card-body {
   padding: 5px !important;
+  margin: auto;
 }
 
 .card-header {
@@ -142,6 +143,10 @@ table {
   background-color: unset;
   font-size: smaller;
   padding: unset;
+}
+
+.forecastTemp {
+  min-width: fit-content;
 }
 
 .form-control {

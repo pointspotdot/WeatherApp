@@ -2,6 +2,7 @@
 let forecastUrl = "https://api.openweathermap.org/data/2.5/forecast?";
 let weatherUrl = "https://api.openweathermap.org/data/2.5/weather?";
 let apikey = "41745d4e1b63d5f8653e46a51bfe8b21";
+let units = "metric";
 let lat;
 let lon;
 
@@ -99,7 +100,7 @@ function handleCity(city) {
     .get(weatherUrl, {
       params: {
         q: city,
-        units: "metric",
+        units: units,
         appid: apikey,
       },
     })
@@ -118,7 +119,7 @@ function handleCity(city) {
         .get(forecastUrl, {
           params: {
             q: city,
-            units: "metric",
+            units: units,
             appid: apikey,
           },
         })
@@ -140,7 +141,7 @@ function handleLocation(latitude, longitude) {
       params: {
         lat: latitude,
         lon: longitude,
-        units: "metric",
+        units: units,
         appid: apikey,
       },
     })
@@ -160,7 +161,7 @@ function handleLocation(latitude, longitude) {
           params: {
             lat: latitude,
             lon: longitude,
-            units: "metric",
+            units: units,
             appid: apikey,
           },
         })
