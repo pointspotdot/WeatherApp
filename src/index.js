@@ -94,6 +94,7 @@ function handleSearch(event) {
 }
 
 function handleCity(city) {
+  city = city;
   axios
     .get(weatherUrl, {
       params: {
@@ -203,13 +204,19 @@ function editAppData(data) {
   }
 
   handleCurrentTemps(data.main);
+
+  let wind = document.querySelector("#wind");
+  wind.innerHTML = data.wind.speed + " meters/sec ";
+  let degrees = document.querySelector("#degrees");
+  degrees.innerHTML = data.wind.deg + " degrees";
+
+  console.log(data);
 }
 
 function editForecast(data) {
   let query = 7;
 
   for (let i = 1; i <= 5; i++) {
-    console.log(data[query]);
     let date = document.querySelector("#day" + i);
     date.innerHTML = handleForecastDay(data[query].dt);
 
@@ -254,7 +261,7 @@ function handleFarenheit() {
   tempButton.classList.add("celsius");
 }
 
-function handleTemp() {
+function handleMetrics() {
   if (tempButton.classList.contains("celsius")) {
     handleCelsius();
   } else if (tempButton.classList.contains("farenheit")) {

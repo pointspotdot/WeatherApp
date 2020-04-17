@@ -110,6 +110,7 @@ table {
 
 .forecast {
   padding-left: unset !important;
+  text-align: right;
 }
 
 .min {
