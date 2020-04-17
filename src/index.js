@@ -261,7 +261,7 @@ function handleFarenheit() {
   tempButton.classList.add("celsius");
 }
 
-function handleMetrics() {
+function handleTemp() {
   if (tempButton.classList.contains("celsius")) {
     handleCelsius();
   } else if (tempButton.classList.contains("farenheit")) {
