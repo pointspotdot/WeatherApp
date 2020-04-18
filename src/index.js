@@ -108,7 +108,6 @@ function handleCity(city) {
       // handle success
       lat = response.data.coord.lat;
       lon = response.data.coord.lon;
-      console.log(response.data);
       editAppData(response.data);
     })
     .catch(function (error) {
@@ -210,6 +209,7 @@ function editAppData(data) {
 
   handleCurrentTemps(data.main);
   handleWind(data.wind);
+  handleHumidity(data.main.humidity);
 }
 
 function editForecast(data) {
@@ -276,6 +276,11 @@ function handleWind(data) {
   } else {
     degrees.innerHTML = ".";
   }
+}
+
+function handleHumidity(data) {
+  let humidity = document.querySelector("#humidity");
+  humidity.innerHTML = data.toFixed(0);
 }
 
 function handleSunEvents(timeInUnix) {
