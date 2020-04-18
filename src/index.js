@@ -108,6 +108,7 @@ function handleCity(city) {
       // handle success
       lat = response.data.coord.lat;
       lon = response.data.coord.lon;
+      console.log(response.data);
       editAppData(response.data);
     })
     .catch(function (error) {
@@ -268,8 +269,13 @@ function handleWind(data) {
 
   let wind = document.querySelector("#wind");
   wind.innerHTML = data.speed.toFixed(1) + windUnit;
+
   let degrees = document.querySelector("#degrees");
-  degrees.innerHTML = data.deg.toFixed(1) + " degrees";
+  if (data.deg) {
+    degrees.innerHTML = " at " + data.deg.toFixed(1) + " degrees.";
+  } else {
+    degrees.innerHTML = ".";
+  }
 }
 
 function handleSunEvents(timeInUnix) {
