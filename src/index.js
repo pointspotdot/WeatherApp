@@ -3,6 +3,7 @@ let forecastUrl = "https://api.openweathermap.org/data/2.5/forecast?";
 let weatherUrl = "https://api.openweathermap.org/data/2.5/weather?";
 let apikey = "41745d4e1b63d5f8653e46a51bfe8b21";
 let units = "metric";
+let currentyCity;
 let lat;
 let lon;
 
@@ -95,7 +96,6 @@ function handleSearch(event) {
 }
 
 function handleCity(city) {
-  city = city;
   axios
     .get(weatherUrl, {
       params: {
@@ -106,6 +106,8 @@ function handleCity(city) {
     })
     .then(function (response) {
       // handle success
+      lat = response.data.coord.lat;
+      lon = response.data.coord.lon;
       editAppData(response.data);
     })
     .catch(function (error) {
@@ -147,6 +149,7 @@ function handleLocation(latitude, longitude) {
     })
     .then(function (response) {
       // handle success
+      currentCity = response.data.name;
       editAppData(response.data);
     })
     .catch(function (error) {
@@ -205,16 +208,17 @@ function editAppData(data) {
   }
 
   handleCurrentTemps(data.main);
-
-  let wind = document.querySelector("#wind");
-  wind.innerHTML = data.wind.speed + " meters/sec ";
-  let degrees = document.querySelector("#degrees");
-  degrees.innerHTML = data.wind.deg + " degrees";
-
-  console.log(data);
+  handleWind(data.wind);
 }
 
 function editForecast(data) {
+  let tempUnit;
+  if (units == "metric") {
+    tempUnit = " ºC";
+  } else {
+    tempUnit = " ºF";
+  }
+
   let query = 7;
 
   for (let i = 1; i <= 5; i++) {
@@ -232,42 +236,40 @@ function editForecast(data) {
     desc.innerHTML = data[query].weather[0].description;
 
     let temp = document.querySelector(".day" + i + "temp");
-    temp.innerHTML = data[query].main.temp.toFixed(1) + " ºC";
+    temp.innerHTML = data[query].main.temp.toFixed(1) + tempUnit;
 
     query += 8;
   }
 }
 
-function handleCelsius() {
-  let temperatures = document.querySelectorAll("#temperature");
-  temperatures.forEach((temp) => {
-    let tempF =
-      (temp.innerHTML.substring(0, temp.innerHTML.indexOf(" ")) * 9) / 5 + 32;
-    temp.innerHTML = tempF.toFixed(1) + " ºF";
-  });
-  tempButton.innerHTML = "(Want to see the temperatures in Celsius?)";
-  tempButton.classList.remove("celsius");
-  tempButton.classList.add("farenheit");
-}
-
-function handleFarenheit() {
-  let temperatures = document.querySelectorAll("#temperature");
-  temperatures.forEach((temp) => {
-    let tempC =
-      (temp.innerHTML.substring(0, temp.innerHTML.indexOf(" ")) - 32) * (5 / 9);
-    temp.innerHTML = tempC.toFixed(1) + " ºC";
-  });
-  tempButton.innerHTML = "(Want to see the temperatures in Farenheit?)";
-  tempButton.classList.remove("farenheit");
-  tempButton.classList.add("celsius");
-}
-
-function handleTemp() {
-  if (tempButton.classList.contains("celsius")) {
-    handleCelsius();
-  } else if (tempButton.classList.contains("farenheit")) {
-    handleFarenheit();
+function handleUnit() {
+  if (unitButton.classList.contains("metric")) {
+    units = "imperial";
+    unitButton.innerHTML = "(Want to see the temperatures in metric units?)";
+    unitButton.classList.remove("metric");
+    unitButton.classList.add("imperial");
+  } else if (unitButton.classList.contains("imperial")) {
+    units = "metric";
+    unitButton.innerHTML = "(Want to see the temperatures in imperial units?)";
+    unitButton.classList.remove("imperial");
+    unitButton.classList.add("metric");
   }
+
+  handleLocation(lat, lon);
+}
+
+function handleWind(data) {
+  let windUnit;
+  if (units == "metric") {
+    windUnit = " m/s";
+  } else {
+    windUnit = " mph";
+  }
+
+  let wind = document.querySelector("#wind");
+  wind.innerHTML = data.speed.toFixed(1) + windUnit;
+  let degrees = document.querySelector("#degrees");
+  degrees.innerHTML = data.deg.toFixed(1) + " degrees";
 }
 
 function handleSunEvents(timeInUnix) {
@@ -309,14 +311,21 @@ function handleWeatherConditions(data) {
 }
 
 function handleCurrentTemps(data) {
+  let tempUnit;
+  if (units == "metric") {
+    tempUnit = " ºC";
+  } else {
+    tempUnit = " ºF";
+  }
+
   let currentDayMin = document.querySelector(".currentDayMin");
-  currentDayMin.innerHTML = data.temp_min.toFixed(1) + " ºC";
+  currentDayMin.innerHTML = data.temp_min.toFixed(1) + tempUnit;
 
   let currentDayMax = document.querySelector(".currentDayMax");
-  currentDayMax.innerHTML = data.temp_max.toFixed(1) + " ºC";
+  currentDayMax.innerHTML = data.temp_max.toFixed(1) + tempUnit;
 
   let currentDayRealFeel = document.querySelector(".currentDayRealFeel");
-  currentDayRealFeel.innerHTML = data.feels_like.toFixed(1) + " ºC";
+  currentDayRealFeel.innerHTML = data.feels_like.toFixed(1) + tempUnit;
 }
 
 function handleForecastDay(timeInUnix) {
@@ -380,8 +389,8 @@ date.innerHTML = formatDate();
 let search = document.getElementById("search-form");
 search.addEventListener("submit", handleSearch);
 
-let tempButton = document.querySelector("#tempButton");
-tempButton.addEventListener("click", handleTemp);
+let unitButton = document.querySelector("#unitButton");
+unitButton.addEventListener("click", handleUnit);
 
 let locationButton = document.querySelector("#locationButton");
 locationButton.addEventListener("click", getLocation);

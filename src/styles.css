@@ -42,6 +42,8 @@ table {
   font-family: "Baloo Thambi 2", cursive;
   font-size: 20px;
   margin-bottom: 0 !important;
+  width: 100%;
+  font-weight: bold;
 }
 
 .searchGroup {
@@ -137,7 +139,7 @@ table {
   font-weight: 600;
 }
 
-#tempButton {
+#unitButton {
   border-width: 0px;
   border-color: unset;
   background-color: unset;
