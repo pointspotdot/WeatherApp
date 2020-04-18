@@ -272,9 +272,7 @@ function handleWind(data) {
 
   let degrees = document.querySelector("#degrees");
   if (data.deg) {
-    degrees.innerHTML = " at " + data.deg.toFixed(1) + " degrees.";
-  } else {
-    degrees.innerHTML = ".";
+    degrees.innerHTML = " at " + data.deg.toFixed(1) + " degrees";
   }
 }
 
